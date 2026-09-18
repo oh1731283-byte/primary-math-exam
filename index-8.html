@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اختبار الرياضيات</title>
+<style>
+*{box-sizing:border-box}
+:root{--purple:#6847a8;--pink:#ff86b7;--yellow:#ffd85a;--blue:#76c9ff;--mint:#8ee0c2;--ink:#3e3860;--cream:#fffdf5;--red:#d9536f;--green:#258565}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;color:var(--ink);background:#fff6cf;background-image:radial-gradient(#ffb8d3 2px,transparent 2px),radial-gradient(#9fdcff 2px,transparent 2px);background-position:0 0,18px 18px;background-size:36px 36px}
+.wrap{max-width:850px;margin:auto;padding:18px 12px 45px}
+.hero{position:relative;text-align:center;padding:30px 15px 27px;border:5px solid #fff;border-radius:30px;background:linear-gradient(135deg,#9b7bd4,#ff94bd);box-shadow:0 10px 0 #6948a7,0 16px 25px #513c7830;overflow:hidden}
+.hero:before{content:"★  ☁  ✿  ✎  1 2 3  ♡  ★";display:block;font-size:25px;color:#fff;margin-bottom:12px;word-spacing:10px}
+.hero h1{display:inline-block;margin:0;padding:10px 24px;border-radius:18px;background:var(--yellow);color:#5d3c91;font-size:31px;box-shadow:5px 5px 0 #fff}
+.hero p{font-weight:900;color:#fff;font-size:17px;margin:17px 0 0}
+.card{position:relative;background:var(--cream);border:4px solid #fff;border-radius:25px;box-shadow:0 7px 0 #d7bde9,0 12px 22px #634d8020;margin:27px 0;padding:25px}
+.login{border-top:10px solid var(--blue)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label.t{display:block;font-weight:900;margin:0 0 7px}
+input[type=text]{width:100%;font-size:17px;padding:13px;border:3px solid #cbb7e8;border-radius:15px;background:#fff;outline:0}
+.btn{border:0;border-radius:17px;padding:15px 25px;font-size:18px;font-weight:900;background:var(--purple);color:#fff;cursor:pointer;box-shadow:5px 5px 0 var(--yellow)}
+.q{padding:78px 23px 23px;border-right:8px solid var(--pink)}
+.q:before{content:attr(data-no);position:absolute;right:18px;top:13px;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--yellow);color:var(--purple);font-size:21px;font-weight:900;border:4px solid #fff;box-shadow:0 4px 0 #e79830}
+.q:after{content:"★";position:absolute;left:20px;top:20px;color:#ff91b8;font-size:28px}
+.q h3{font-size:20px;line-height:1.9;margin:0 0 17px;color:#543a88}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:11px;direction:ltr}
+.opt{direction:ltr;display:flex;align-items:center;gap:10px;min-height:55px;padding:12px 14px;background:#fff;border:3px solid #cce7f6;border-radius:17px;font-weight:900;cursor:pointer}
+.opt:nth-child(2n){border-color:#f3c4d8}.opt:has(input:checked){background:#fff4b9;border-color:#f1b82f;box-shadow:inset 7px 0 #ff91b8}
+.opt input{width:21px;height:21px;accent-color:#784fac}
+.math{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:Arial,sans-serif;font-weight:800}
+.progress{height:16px;background:#eee2f6;border-radius:20px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#76c9ff,#ff86b7)}
+.hidden{display:none!important}.center{text-align:center}.warn{background:#fff0cf;border-right:6px solid var(--yellow);padding:11px;border-radius:12px;font-weight:900;color:#97465c}
+.score{display:inline-block;background:var(--yellow);color:var(--purple);font-size:43px;font-weight:900;padding:9px 24px;border-radius:18px}
+.bad{margin:12px 0;padding:14px;background:#fff0f4;border-right:6px solid var(--red);border-radius:13px;text-align:right;line-height:1.8}.correct{color:var(--green);font-weight:900}.good{background:#edfbf5;border-right:6px solid var(--mint);padding:15px;border-radius:13px;font-weight:900}
+@media(max-width:600px){.grid,.opts{grid-template-columns:1fr}.hero h1{font-size:25px}.hero:before{font-size:18px}.card{padding-left:16px;padding-right:16px}.q{padding-top:78px}.btn{width:100%}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero"><h1>اختبار الرياضيات الممتع</h1><p>فكّري واختاري الإجابة الصحيحة يا بطل/يا بطلة 🌟</p></section>
+
+<section id="login" class="card login">
+<h2>جاهز/ة للمغامرة؟ 🎈</h2>
+<div class="grid">
+<div><label class="t">الاسم الثلاثي</label><input id="name" type="text" placeholder="اكتب الاسم الثلاثي"></div>
+<div><label class="t">الفصل</label><input id="cls" type="text" placeholder="اكتب الفصل"></div>
+</div>
+<p id="loginErr" class="warn hidden"></p><br>
+<button id="start" class="btn">ابدأ الاختبار 🚀</button>
+</section>
+
+<form id="quiz" class="hidden"></form>
+<section id="result" class="card hidden center">
+<div style="font-size:58px">🏆</div><h2>انتهى الاختبار!</h2><p id="who"></p><div id="score" class="score"></div><p id="msg"></p><div id="corrections"></div>
+</section>
+</main>
+
+<script>
+const Q=[
+["العدد <span class='math'>1401</span> يقبل القسمة على ....",["5","4","3","2"],2],
+["يقبل العدد القسمة على .... إذا كان مجموع أرقامه يقبل القسمة على <span class='math'>3</span>",["6","5","3","2"],2],
+["من الأعداد الأولية ....",["25","23","28","27"],1],
+["أصغر عدد أولي فردي هو ....",["2","3","6","5"],1],
+["العدد <span class='math'>4</span> من عوامل ....",["564","337","502","517"],0],
+["ع.م.أ لـ <span class='math'>3 ، 6</span> هو ....",["4","3","6","12"],1],
+["العدد الذي عوامله الأولية <span class='math'>2 ، 5 ، 7</span> هو ....",["70","35","14","10"],0],
+["أي مما يلي لا يقبل القسمة على <span class='math'>4</span>؟",["418","300","500","432"],0],
+["العدد .... يقبل القسمة على <span class='math'>2 ، 3 ، 5</span> معًا",["30","20","10","6"],0],
+["العدد الأولي الذي مجموع عوامله <span class='math'>8</span> هو ....",["10","7","5","6"],1]
+];
+const $=s=>document.querySelector(s);
+$("#start").onclick=()=>{
+ const n=$("#name").value.trim(),c=$("#cls").value.trim();
+ if(n.split(/\s+/).length<3||!c){$("#loginErr").textContent="اكتب الاسم الثلاثي والفصل أولًا ⭐";$("#loginErr").classList.remove("hidden");return}
+ $("#login").classList.add("hidden");render();$("#quiz").classList.remove("hidden");scrollTo(0,0)
+};
+function render(){
+ $("#quiz").innerHTML='<section class="card"><b>🎯 عدد الأسئلة: 10</b><div class="progress"><span id="bar"></span></div><span id="pc">0 من 10 تمت الإجابة عنها</span></section>'+
+ Q.map((q,i)=>`<section class="card q" data-no="${i+1}"><h3>${q[0]}</h3><div class="opts">${q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span class="math">${o}</span></label>`).join("")}</div></section>`).join("")+
+ '<section class="card center"><p id="quizErr" class="warn hidden"></p><button class="btn" type="submit">تسليم الاختبار ✨</button></section>';
+ $("#quiz").addEventListener("change",progress);$("#quiz").addEventListener("submit",finish)
+}
+function progress(){let n=Q.filter((_,i)=>document.querySelector(`input[name=q${i}]:checked`)).length;$("#bar").style.width=n*10+"%";$("#pc").textContent=n+" من 10 تمت الإجابة عنها"}
+function finish(e){
+ e.preventDefault();let a=[],missing=false;Q.forEach((_,i)=>{let x=document.querySelector(`input[name=q${i}]:checked`);if(!x)missing=true;a.push(x?+x.value:null)});
+ if(missing){$("#quizErr").textContent="لسه في أسئلة من غير إجابة 👀";$("#quizErr").classList.remove("hidden");return}
+ let sc=a.reduce((s,x,i)=>s+(x===Q[i][2]),0);$("#quiz").classList.add("hidden");$("#result").classList.remove("hidden");
+ $("#who").textContent=$("#name").value.trim()+" — الفصل: "+$("#cls").value.trim();$("#score").textContent=sc+" / 10";
+ $("#msg").textContent=sc===10?"ممتاز جدًا! أنت نجم الرياضيات ⭐":sc>=8?"شاطر جدًا! نتيجة رائعة 🎉":sc>=6?"أحسنت! راجع الأخطاء وهتبقى أقوى 💪":"راجع التصحيح وحاول مرة أخرى في المذاكرة 🌈";
+ let w=[];a.forEach((x,i)=>{if(x!==Q[i][2])w.push(`<div class="bad"><b>السؤال ${i+1}</b><br>${Q[i][0]}<br>إجابتك: <span class="math">${Q[i][1][x]}</span><br><span class="correct">الصحيح: <span class="math">${Q[i][1][Q[i][2]]}</span></span></div>`)});
+ $("#corrections").innerHTML=w.length?'<h3>📚 راجع الأسئلة دي</h3>'+w.join(""):'<div class="good">كل الإجابات صحيحة! 🌟🌟🌟</div>';scrollTo(0,0)
+}
+</script></body></html>
